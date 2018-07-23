@@ -12,7 +12,7 @@ class GenerateController extends Controller
 	{
         try{
             $filePath = dirname(__DIR__ ) . "/example/ExampleController.php";
-            $destPath = Yii::getAlias('@app') . "/controllers/" . ucfirst($name) . "Controller.php";
+            $destPath = Yii::getAlias('@backend') . "/controllers/" . ucfirst($name) . "Controller.php";
             if(!file_exists($destPath)){
                 $handle = fopen($filePath, "r");
                 
@@ -20,15 +20,17 @@ class GenerateController extends Controller
                 $newCont = fopen($destPath, "w") or die("Unable to open file!");
 
                 $content = "";
+                //$content = str_replace("Example", ucfirst($name), $handle);
                 while (($line = fgets($handle)) !== false) {
                         if(stristr($line,"ExampleController")){
-                            $content = $content . str_replace("Example", ucfirst($name), $line);
+                            $content .= str_replace("Example", ucfirst($name), $line);
                                 
                         } else {
-                            $content = $content . $line;
+                            $content .= $line;
                         }
                 }
 
+                //var_dump($content);die;
                 fwrite($newCont, $content);
                 fclose($handle);
                 fclose($newCont);
