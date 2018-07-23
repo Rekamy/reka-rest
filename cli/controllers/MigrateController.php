@@ -3,7 +3,7 @@ namespace cli\controllers;
 
 use Yii;
 use yii\helpers\Console;
-use app\components\Migration;
+use backend\components\Migration;
 use yii\console\Controller;
 use yii\console\controllers\MigrateController as BaseMigrateController;
 

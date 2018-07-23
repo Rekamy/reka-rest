@@ -23,6 +23,7 @@ class SiteController extends Controller
 
 		return $behaviors;
 	}
+
 	public function actionIndex()
 	{
 		$object = [

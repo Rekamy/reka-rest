@@ -1,17 +1,12 @@
 <?php
 
-namespace cli\migrations;
-
-use app\components\Migration;
+use yii\db\Migration;
 
 /**
- * Class m180712_201402_init
+ * Class m180723_185011_init
  */
-class m180712_201402_init extends Migration
+class m180723_185011_init extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
     public function safeUp()
     {
         $tableOptions = null;
@@ -33,11 +28,12 @@ class m180712_201402_init extends Migration
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        $this->createTable('{{%company}}', [
+        $this->createTable('{{%setting}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(),
-            'address' => $this->string(),
-            'contact' => $this->integer(),
+            'description' => $this->string(),
+            'key' => $this->string(),
+            'value' => $this->string(),
 
             'status' => $this->smallInteger()->notNull()->defaultValue(1),
             'created_at' => $this->integer(),
@@ -48,33 +44,6 @@ class m180712_201402_init extends Migration
             'deleted_by' => $this->integer(),
         ], $tableOptions);
 
-        $this->createTable('{{%user_company}}', [
-            'user_id' => $this->integer(),
-            'company_id' => $this->string(),
-
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
-            'created_by' => $this->integer(),
-            'updated_by' => $this->integer(),
-            'deleted_at' => $this->integer(),
-            'deleted_by' => $this->integer(),
-        ], $tableOptions);
-
-        $this->createTable('{{%branch}}', [
-            'id' => $this->primaryKey(),
-            'company_id' => $this->integer(),
-            'name' => $this->string(),
-            'address' => $this->string(),
-            'contact' => $this->integer(),
-
-            'status' => $this->smallInteger()->notNull()->defaultValue(1),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
-            'created_by' => $this->integer(),
-            'updated_by' => $this->integer(),
-            'deleted_at' => $this->integer(),
-            'deleted_by' => $this->integer(),
-        ], $tableOptions);
         $this->insertData();
     }
 
@@ -83,7 +52,7 @@ class m180712_201402_init extends Migration
      */
     public function safeDown()
     {
-        $this->customDrop();
+        // $this->customDrop();
 
         return false;
     }
@@ -92,12 +61,10 @@ class m180712_201402_init extends Migration
      */
     public function insertData()
     {
-        $this->batchInsert('{{%company}}', ['name'], [
-            ['Rekamy Resources'],
-            ['Sarra Global Sdn Bhd'],
+        $this->batchInsert('{{%setting}}', ['name'], [
+            ['Use RBAC'],
+            ['Database Driver'],
         ]);
-
-        return false;
     }
 
     /*
@@ -113,5 +80,4 @@ class m180712_201402_init extends Migration
 
         return false;
     }
-    */
-}
+    */}

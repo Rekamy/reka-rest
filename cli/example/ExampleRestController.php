@@ -5,9 +5,9 @@ namespace backend\controllers;
 use yii\rest\ActiveController;
 use yii\web\Response;
 
-class SettingController extends ActiveController
+class ExampleRestController extends ActiveController
 {
-    public $modelClass = 'backend\models\Setting';
+    public $modelClass = 'backend\models\ExampleRest';
 
 	public function behaviors()
 	{
