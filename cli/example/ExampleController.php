@@ -5,8 +5,9 @@ namespace backend\controllers;
 use yii\rest\Controller;
 use yii\web\Response;
 
-class SiteController extends Controller
+class ExampleController extends Controller
 {
+
 	public function behaviors()
 	{
 		$behaviors = parent::behaviors();
@@ -23,12 +24,38 @@ class SiteController extends Controller
 
 		return $behaviors;
 	}
+
 	public function actionIndex()
 	{
 		$object = [
-			'name' => 'Zahrin',
-			'company' => 'Rekamy',
+			'Controller' => "ExampleController",
+			'action' => 'index',
 		];
 		return $object;
 	}
+
+	public function actionCreate()
+	{
+		echo 'actionCreate';
+
+	}
+
+	public function actionRead()
+	{
+		echo 'actionRead';
+
+	}
+
+	public function actionUpdate()
+	{
+		echo 'actionUpdate';
+
+	}
+
+	public function actionDelete()
+	{
+		echo 'actionDelete';
+
+	}
+
 }

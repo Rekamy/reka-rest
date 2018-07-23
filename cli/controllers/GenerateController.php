@@ -8,19 +8,39 @@ use yii\console\Controller;
 class GenerateController extends Controller
 {
 
-    public $options;
-
-    public function options($actionID)
-    {
-        // $actionId might be used in subclasses to provide options specific to action id
-        return ['options'];
-    }
-
-	public function actionModel()
+	public function actionController($name)
 	{
+        try{
+            $filePath = dirname(__DIR__ ) . "/example/ExampleController.php";
+            $destPath = Yii::getAlias('@backend') . "/controllers/" . ucfirst($name) . "Controller.php";
+            if(!file_exists($destPath)){
+                $handle = fopen($filePath, "r");
+                
 
-		echo 'create model '. $options;
+                $newCont = fopen($destPath, "w") or die("Unable to open file!");
 
+                $content = "";
+                //$content = str_replace("Example", ucfirst($name), $handle);
+                while (($line = fgets($handle)) !== false) {
+                        if(stristr($line,"ExampleController")){
+                            $content .= str_replace("Example", ucfirst($name), $line);
+                                
+                        } else {
+                            $content .= $line;
+                        }
+                }
+
+                //var_dump($content);die;
+                fwrite($newCont, $content);
+                fclose($handle);
+                fclose($newCont);
+                echo ucfirst($name) . "Controller Created";
+            } else {
+                throw new \Exception(ucfirst($name) . "Controller Already Exist");
+            }
+        } catch(\Exception $e){
+            echo $e;
+        }
 	}
 
 }
