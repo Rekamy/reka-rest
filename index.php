@@ -8,7 +8,8 @@ require(__DIR__ . '/vendor/autoload.php');
 require(__DIR__ . '/vendor/yiisoft/yii2/Yii.php');
 
 $config = require __DIR__ . '/config/main.php';
-
+// var_dump(__DIR__ . '/config/main.php');die;
+// var_dump($config);die;
 (new yii\web\Application($config))->run();
 
 

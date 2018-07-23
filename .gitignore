@@ -20,6 +20,9 @@ Thumbs.db
 # frontend module dir
 /frontend
 
+# mobile apps module dir
+/mobile
+
 # composer vendor dir
 /vendor
 

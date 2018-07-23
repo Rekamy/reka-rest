@@ -1,12 +1,12 @@
 <?php
 
-namespace app\controllers;
+namespace backend\controllers;
 
 use yii\rest\ActiveController;
 
 class UserController extends ActiveController
 {
-    public $modelClass = 'app\models\User';
+    public $modelClass = 'backend\models\User';
 
     public function behaviors()
     {
