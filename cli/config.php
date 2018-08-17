@@ -24,10 +24,17 @@ return [
             ],
         ],
     ],
-/*	'components' => [
+	'components' => [
+/*      'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'sqlite:@micro/db.sqlite',
+        ],*/
 		'db' => [
 			'class' => 'yii\db\Connection',
-			'dsn' => 'sqlite:@micro/db.sqlite',
+            'dsn' => 'mysql:host=localhost:3306;dbname=rekarest_db',
+            'username' => 'root',
+            'password' => '',
+			'charset' => 'utf8',
 		],
-	],*/
+	],
 ];

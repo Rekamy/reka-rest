@@ -37,7 +37,6 @@ class ExampleController extends Controller
 	public function actionCreate()
 	{
 		echo 'actionCreate';
-
 	}
 
 	public function actionRead()

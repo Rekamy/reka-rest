@@ -13,7 +13,6 @@ return [
 		// '@frontend' => dirname(__DIR__). '/frontend',
 		// '@mobile' => dirname(__DIR__). '/mobile',
 	],
-
 	'components' => [
 		'request' => [
 			'parsers' => [
@@ -32,5 +31,12 @@ return [
 			'class' => 'yii\db\Connection',
 			'dsn' => 'sqlite:@app/db.sqlite',
 		],
+		/*'db' => [
+			'class' => 'yii\db\Connection',
+			'dsn' => 'mysql:localhost:3307/db_name',
+			'user' => 'root',
+			'password' => '',
+			'charset' => 'utf8',
+		],*/
 	],
 ];

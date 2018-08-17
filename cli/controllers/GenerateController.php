@@ -4,11 +4,15 @@ namespace cli\controllers;
 use Yii;
 use yii\helpers\Console;
 use yii\console\Controller;
+use yii\gii\CodeFile;
+use yii\gii\Generator;
 
 class GenerateController extends Controller
 {
 
     public $overwrite = false;
+    public $defaultAction = 'all';
+    public $db = 'db';
 
     public function options($actionID)
     {
@@ -19,6 +23,19 @@ class GenerateController extends Controller
     {
         return ['o' => 'overwrite'];
     }
+
+    public function actionAll($type = 'rest', $template = 'default')
+    {
+        $this->overwrite = true;
+        $db = Yii::$app->getDb();
+        var_dump(Yii::getAlias('@frontend/vue/app2/src'));
+        die;
+        // $file = new CodeFile(
+        //     Yii::getAlias('@frontend/vue/app/src/' . $controllerClassName . '.php',$this->render('ExampleView.php'))
+        // );
+        // var_dump($db->getSchema());die;
+    }
+
 
     public function actionCrud($name, $type = 'soap')
     {
@@ -37,7 +54,7 @@ class GenerateController extends Controller
         }
 
         try{
-            $filePath = dirname(__DIR__ ) . "/example/models/ExampleModel.php";
+            $filePath = dirname(__DIR__ ) . "/template/default/models/ExampleModel.php";
             $destPath = Yii::getAlias('@backend') . "/models/" . ucfirst($name) . ".php";
 
             if(file_exists($destPath) && !$this->overwrite){

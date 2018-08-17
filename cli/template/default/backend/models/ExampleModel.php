@@ -1,21 +1,21 @@
 <?php
-
 namespace backend\models;
 
 use Yii;
+use backend\models\base\ExampleModel;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 use \yii\db\Expression;
 
-class ExampleModel extends ActiveRecord
+class ExampleModel extends BaseModel
 {
 
     /**
      * @inheritdoc
      * @return array mixed
      */
-/*    public function behaviors()
+    public function behaviors()
     {
         return [
             'timestamp' => [
@@ -30,11 +30,16 @@ class ExampleModel extends ActiveRecord
                 'updatedByAttribute' => 'updated_by',
             ],
         ];
-    }*/
+    }
 
     public static function tableName()
     {
         return '{{%ExampleModel}}';
+    }
+
+    public static function arrayList()
+    {
+        return yii\helpers\ArrayHelper::map(self::findAll('1=1'), 'id' , 'name');
     }
 
     /**
