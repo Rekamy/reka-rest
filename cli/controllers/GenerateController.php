@@ -4,8 +4,12 @@ namespace cli\controllers;
 use Yii;
 use yii\helpers\Console;
 use yii\console\Controller;
-use yii\gii\CodeFile;
-use yii\gii\Generator;
+use backend\components\MakeFile;
+use cli\template\ModelGenerator;
+use cli\template\CrudGenerator;
+use yii\helpers\Inflector;
+use yii\web\View;
+
 
 class GenerateController extends Controller
 {
@@ -27,13 +31,72 @@ class GenerateController extends Controller
     public function actionAll($type = 'rest', $template = 'default')
     {
         $this->overwrite = true;
+
         $db = Yii::$app->getDb();
-        var_dump(Yii::getAlias('@frontend/vue/app2/src'));
-        die;
-        // $file = new CodeFile(
-        //     Yii::getAlias('@frontend/vue/app/src/' . $controllerClassName . '.php',$this->render('ExampleView.php'))
-        // );
-        // var_dump($db->getSchema());die;
+        // $tableSchema = $db->getTableSchema('user')->getColumnNames();
+        $getTableNames = $db->schema->getTableNames();
+        $templatePath = Yii::getAlias('@app/cli/template/default/');
+        $templates = [
+            'models' => [
+                'baseModel' => $templatePath . 'backend/models/base/Example.php',
+                'extendedModel' => $templatePath . 'backend/models/Example.php',
+                'queryModel' => $templatePath . 'backend/models/query/ExampleQuery.php',
+                'searchModel' => $templatePath . 'backend/models/search/ExampleSearch.php',
+            ],
+            'controllers' => [
+                'activeController' => $templatePath . 'backend/controllers/active/ExampleController.php',
+            ],
+            'frontend' => [
+                'views' => $templatePath . 'frontend/vue/src/views/Example.php',
+                // 'route' => $templatePath . 'frontend/vue/app/src/Example.js',
+            ],
+/*            'mobile' => [
+                Yii::getAlias('@app/mobile/react/src/views/'.$fileName.'.php'),
+            ],*/
+        ];
+
+        foreach ($getTableNames as $key => $tableName) {
+
+            $fileName = Inflector::camel2words(Inflector::id2camel($tableName, '_'));
+            $config[] = [
+                'modelName' => $fileName,
+                'tableName' => $tableName,
+            ];
+            $targets[] = [
+                'models' => [
+                    'baseModel' => Yii::getAlias('@app/backend/models/base/'.$fileName.'.php'),
+                    'extendedModel' => Yii::getAlias('@app/backend/models/'.$fileName.'.php'),
+                    'queryModel' => Yii::getAlias('@app/backend/models/query/'.$fileName.'Query.php'),
+                    'searchModel' => Yii::getAlias('@app/backend/models/search/'.$fileName.'Search.php'),
+                ],
+                'controllers' => [
+                    'activeController' => Yii::getAlias('@app/backend/controllers/active/'.$fileName.'Controller.php'),
+                ],
+                'frontend' => [
+                    'views' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'.vue'),
+                    // 'route' => Yii::getAlias('@app/frontend/app/vue/app/src/router.js'),
+                ],
+                /*'mobile' => [
+                    Yii::getAlias('@app/mobile/react/src/views/'.$fileName.'.php'),
+                ],*/
+            ];
+
+        }
+
+        $v = new View();
+        foreach ($targets as $key => $target) {
+            foreach ($target as $module => $classes) {
+                foreach ($classes as $type => $class) {
+                    $codeFile = new MakeFile(
+                        $target[$module][$type],
+                        $v->renderFile($templates[$module][$type], ['g' => $config[$key]])
+                    );
+                    if($codeFile->save()) {
+                        Console::output('create file '.$target[$module][$type]);
+                    }
+                }
+            }
+        }
     }
 
 

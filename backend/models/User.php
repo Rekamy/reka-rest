@@ -1,14 +1,13 @@
 <?php
-
 namespace backend\models;
 
 use Yii;
-use yii\db\ActiveRecord;
+use backend\models\base\User;
+use \yii\db\Expression;
+use \yii\base\Exception;
 
-class User extends ActiveRecord
+class Example extends BaseModel
 {
-    public static function tableName()
-    {
-        return '{{%user}}';
-    }
+
+
 }

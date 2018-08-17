@@ -1,11 +1,11 @@
-<?php
+<?= "<?php\n" ?>
 
 namespace backend\controllers;
 
 use yii\rest\Controller;
 use yii\web\Response;
 
-class ExampleController extends Controller
+class <?= $g['modelName'] ?>Controller extends Controller
 {
 
 	public function behaviors()
@@ -28,7 +28,7 @@ class ExampleController extends Controller
 	public function actionIndex()
 	{
 		$object = [
-			'Controller' => "ExampleController",
+			'Controller' => "<?= $g['modelName'] ?>Controller",
 			'action' => 'index',
 		];
 		return $object;
