@@ -557,10 +557,10 @@
                 <div class="col s12 m4 l4">
                   <div id="profile-card" class="card">
                     <div class="card-image waves-effect waves-block waves-light">
-                      <img class="activator" src="dist/materialize/images/gallary/3.png" alt="user bg">
+                      <img class="activator" src="dist-asset/materialize/images/gallary/3.png" alt="user bg">
                     </div>
                     <div class="card-content">
-                      <img src="dist/materialize/images/avatar/avatar-7.png" alt="" class="circle responsive-img activator card-profile-image cyan lighten-1 padding-2">
+                      <img src="dist-asset/materialize/images/avatar/avatar-7.png" alt="" class="circle responsive-img activator card-profile-image cyan lighten-1 padding-2">
                       <a class="btn-floating activator btn-move-up waves-effect waves-light red accent-2 z-depth-4 right">
                         <i class="material-icons">edit</i>
                       </a>
@@ -603,7 +603,7 @@
                   <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
                       <a href="#">
-                        <img src="dist/materialize/images/gallary/3.png" alt="item-img">
+                        <img src="dist-asset/materialize/images/gallary/3.png" alt="item-img">
                       </a>
                       <h4 class="card-title text-shadow m-0">Card Title</h4>
                     </div>
@@ -645,7 +645,7 @@
                     <div class="card-image waves-effect waves-block waves-light">
                       <a href="#" class="btn-floating btn-large btn-price waves-effect waves-light teal accent-4">$189</a>
                       <a href="#">
-                        <img src="dist/materialize/images/gallary/11.png" alt="item-img">
+                        <img src="dist-asset/materialize/images/gallary/11.png" alt="item-img">
                       </a>
                     </div>
                     <ul class="card-action-buttons">

@@ -8,7 +8,7 @@
               <li>
                 <h1 class="logo-wrapper">
                   <router-link to="/" class="brand-logo darken-1">
-                    <img src="dist/materialize/images/logo/materialize-logo.png" alt="materialize logo">
+                    <img src="dist-asset/materialize/images/logo/materialize-logo.png" alt="materialize logo">
                     <span class="logo-text hide-on-med-and-down">Materialize</span>
                   </router-link>
                 </h1>
@@ -39,7 +39,7 @@
               <li>
                 <a href="javascript:void(0);" class="waves-effect waves-block waves-light profile-button" data-activates="profile-dropdown">
                   <span class="avatar-status avatar-online">
-                    <img src="dist/materialize/images/avatar/avatar-7.png" alt="avatar">
+                    <img src="dist-asset/materialize/images/avatar/avatar-7.png" alt="avatar">
                     <i></i>
                   </span>
                 </a>

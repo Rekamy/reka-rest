@@ -1,5 +1,5 @@
 <template>
   <div class="<?= $g['modelName'] ?>">
-    <h1>This is an <?= $g['modelName'] ?> page</h1>
+    <h1>This is an <?= $g['modelName'] ?> form page</h1>
   </div>
 </template>

@@ -47,7 +47,9 @@ class GenerateController extends Controller
                 'activeController' => $templatePath . 'backend/controllers/active/ExampleController.php',
             ],
             'frontend' => [
-                'views' => $templatePath . 'frontend/vue/src/views/Example.php',
+                'index' => $templatePath . 'frontend/vue/src/views/index.php',
+                'detail' => $templatePath . 'frontend/vue/src/views/detail.php',
+                'form' => $templatePath . 'frontend/vue/src/views/form.php',
                 // 'route' => $templatePath . 'frontend/vue/app/src/Example.js',
             ],
 /*            'mobile' => [
@@ -73,7 +75,9 @@ class GenerateController extends Controller
                     'activeController' => Yii::getAlias('@app/backend/controllers/active/'.$fileName.'Controller.php'),
                 ],
                 'frontend' => [
-                    'views' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'.vue'),
+                    'index' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/index.vue'),
+                    'detail' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/detail.vue'),
+                    'form' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/form.vue'),
                     // 'route' => Yii::getAlias('@app/frontend/app/vue/app/src/router.js'),
                 ],
                 /*'mobile' => [
