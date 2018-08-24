@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div id="app-body">
     <div id="loader-wrapper">
       <div id="loader"></div>
       <div class="loader-section section-left"></div>
       <div class="loader-section section-right"></div>
     </div>
-    <app-header></app-header>
+    <app-header is-horizontal></app-header>
     <app-content-container></app-content-container>
     <app-footer></app-footer>
   </div>

@@ -1,11 +1,21 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import './registerServiceWorker'
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import "./registerServiceWorker";
 
-Vue.config.productionTip = false
+// additional CSS
+import "../public/dist-asset/materialize/css/themes/horizontal-menu/materialize.css";
+import "../public/dist-asset/materialize/css/themes/horizontal-menu/style.css";
+// import "../public/dist-asset/style.css";
+import "../public/dist-asset/materialize/css/custom/custom.css";
+import "../public/dist-asset/materialize/css/layouts/style-horizontal.css";
+import "../public/dist-asset/materialize/vendors/perfect-scrollbar/perfect-scrollbar.css";
+import "../public/dist-asset/materialize/vendors/jvectormap/jquery-jvectormap.css";
+import "../public/dist-asset/materialize/vendors/flag-icon/css/flag-icon.min.css";
+
+Vue.config.productionTip = false;
 
 new Vue({
   router,
   render: h => h(App)
-}).$mount('#app')
+}).$mount("#app");
