@@ -1,0 +1,29 @@
+<template>
+    <div class="fixed-action-btn" style="bottom: 50px; right: 19px;">
+        <a class="btn-floating btn-large">
+            <i class="material-icons">add</i>
+        </a>
+        <ul>
+            <li>
+                <a href="css-helpers.html" class="btn-floating blue" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;">
+                    <i class="material-icons">help_outline</i>
+                </a>
+            </li>
+            <li>
+                <a href="cards-extended.html" class="btn-floating green" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;">
+                    <i class="material-icons">widgets</i>
+                </a>
+            </li>
+            <li>
+                <a href="app-calendar.html" class="btn-floating amber" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;">
+                    <i class="material-icons">today</i>
+                </a>
+            </li>
+            <li>
+                <a href="app-email.html" class="btn-floating red" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;">
+                    <i class="material-icons">mail_outline</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</template>
