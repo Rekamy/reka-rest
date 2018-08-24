@@ -28,34 +28,36 @@ class GenerateController extends Controller
         return ['o' => 'overwrite'];
     }
 
-    public function actionAll($type = 'rest', $template = 'default')
+    public function actionAll($type = 'rest', $template = 'default', $themes = 'vue')
     {
+        $themes = 'vuetify';
         $this->overwrite = true;
 
         $db = Yii::$app->getDb();
         // $tableSchema = $db->getTableSchema('user')->getColumnNames();
         $getTableNames = $db->schema->getTableNames();
-        $templatePath = Yii::getAlias('@app/cli/template/default/');
+        $templatePath = Yii::getAlias('@app/cli/template/');
         $templates = [
             'models' => [
-                'baseModel' => $templatePath . 'backend/models/base/Example.php',
-                'extendedModel' => $templatePath . 'backend/models/Example.php',
-                'queryModel' => $templatePath . 'backend/models/query/ExampleQuery.php',
-                'searchModel' => $templatePath . 'backend/models/search/ExampleSearch.php',
+                'baseModel' => $templatePath . 'backend/'.$template.'/models/base/Example.php',
+                'extendedModel' => $templatePath . 'backend/'.$template.'/models/Example.php',
+                'queryModel' => $templatePath . 'backend/'.$template.'/models/query/ExampleQuery.php',
+                'searchModel' => $templatePath . 'backend/'.$template.'/models/search/ExampleSearch.php',
             ],
             'controllers' => [
-                'activeController' => $templatePath . 'backend/controllers/active/ExampleController.php',
+                'activeController' => $templatePath . 'backend/'.$template.'/controllers/active/ExampleController.php',
             ],
             'frontend' => [
-                'index' => $templatePath . 'frontend/vue/src/views/index.php',
-                'detail' => $templatePath . 'frontend/vue/src/views/detail.php',
-                'form' => $templatePath . 'frontend/vue/src/views/form.php',
+                'index' => $templatePath . 'frontend/'.$template.'/'.$themes.'/src/views/index.php',
+                'detail' => $templatePath . 'frontend/'.$template.'/'.$themes.'/src/views/detail.php',
+                'form' => $templatePath . 'frontend/'.$template.'/'.$themes.'/src/views/form.php',
                 // 'route' => $templatePath . 'frontend/vue/app/src/Example.js',
             ],
 /*            'mobile' => [
                 Yii::getAlias('@app/mobile/react/src/views/'.$fileName.'.php'),
             ],*/
         ];
+        var_dump($templates);die;
 
         foreach ($getTableNames as $key => $tableName) {
 
@@ -86,7 +88,8 @@ class GenerateController extends Controller
             ];
 
         }
-
+        $routerJs = [];
+        // generate view file
         $v = new View();
         foreach ($targets as $key => $target) {
             foreach ($target as $module => $classes) {
@@ -95,12 +98,15 @@ class GenerateController extends Controller
                         $target[$module][$type],
                         $v->renderFile($templates[$module][$type], ['g' => $config[$key]])
                     );
+                    $routerJs[] =  $target[$module][$type];
                     if($codeFile->save()) {
                         Console::output('create file '.$target[$module][$type]);
                     }
                 }
             }
         }
+        
+        // regenerate router js file
     }
 
 
