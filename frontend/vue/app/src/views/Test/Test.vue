@@ -47,3 +47,10 @@
         </div>
     </div>
 </template>
+<script>
+  import Test from './test'
+  export default Test
+</script>
+<style>
+  @import './test';
+</style>
