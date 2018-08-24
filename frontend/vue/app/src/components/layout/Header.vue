@@ -133,7 +133,7 @@
         <nav id="horizontal-nav" class="white hide-on-med-and-down">
           <div class="nav-wrapper">
             <ul id="ul-horizontal-nav" class="left hide-on-med-and-down">
-              <li class="active">
+              <li>
                 <a class="dropdown-menu active" href="#" data-activates="Dashboarddropdown">
                   <i class="material-icons">dashboard</i>
                   <span>Dashboard
@@ -225,7 +225,7 @@
         <!-- Dashboarddropdown -->
         <ul id="Dashboarddropdown" class="dropdown-content dropdown-horizontal-list">
           <li><router-link to="/dashboard-ecommerce">eCommerce</router-link></li>
-          <li class="active"><router-link to="/dashboard-analytics">Analytics</router-link></li>
+          <li><router-link to="/dashboard-analytics">Analytics</router-link></li>
         </ul>
         <!-- Templatesdropdown -->
         <ul id="Templatesdropdown" class="dropdown-content dropdown-horizontal-list">

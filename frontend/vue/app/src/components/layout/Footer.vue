@@ -21,7 +21,7 @@ export default {
       year: '2018',
       company: 'Scarf Sweethoney',
       companyPage: 'https://scarfsweethoney.com.my',
-      developer: 'Rekamy',
+      developer: 'Rekamy Resources',
       developerPage: 'https://rekamy.com',
     };
   },

@@ -16,7 +16,7 @@
                     <span>eCommerce</span>
                   </a>
                 </li>
-                <li clas="active">
+                <li class="active">
                   <a href="index.html">
                     <i class="material-icons">keyboard_arrow_right</i>
                     <span>Analytics</span>
