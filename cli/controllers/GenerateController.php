@@ -9,6 +9,7 @@ use cli\template\ModelGenerator;
 use cli\template\CrudGenerator;
 use yii\helpers\Inflector;
 use yii\web\View;
+use backend\components\Migration;
 
 
 class GenerateController extends Controller
@@ -32,7 +33,7 @@ class GenerateController extends Controller
     {
         $themes = 'vuetify';
         $this->overwrite = true;
-
+        (new Migration)->fresh();
         $db = Yii::$app->getDb();
         // $tableSchema = $db->getTableSchema('user')->getColumnNames();
         $getTableNames = $db->schema->getTableNames();
