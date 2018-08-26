@@ -24,8 +24,49 @@ class m180723_185011_init extends Migration
             'email' => $this->string()->notNull()->unique(),
 
             'status' => $this->smallInteger()->notNull()->defaultValue(1),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
+            'created_by' => $this->integer(),
+            'updated_by' => $this->integer(),
+            'deleted_at' => $this->integer(),
+            'deleted_by' => $this->integer()->defaultValue(0)->notNull(),
+        ], $tableOptions);
+
+        $this->createTable('{{%profile}}', [
+            'id' => $this->primaryKey(),
+            'firstname' => $this->string(),
+            'lastname' => $this->string(),
+            'age' => $this->integer(),
+            'gender' => $this->string(),
+            'avatar' => $this->string(),
+
+            'status' => $this->smallInteger()->notNull()->defaultValue(1),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
+            'created_by' => $this->integer(),
+            'updated_by' => $this->integer(),
+            'deleted_at' => $this->integer(),
+            'deleted_by' => $this->integer()->defaultValue(0)->notNull(),
+        ], $tableOptions);
+
+        $this->createTable('{{%company}}', [
+            'id' => $this->primaryKey(),
+            'reg_no' => $this->string(),
+            'name' => $this->string(),
+            'email' => $this->string(),
+            'contact' => $this->string(),
+            'address' => $this->string(),
+            'poscode' => $this->integer(),
+            'state' => $this->string(),
+            'country' => $this->string(),
+
+            'status' => $this->smallInteger()->notNull()->defaultValue(1),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
+            'created_by' => $this->integer(),
+            'updated_by' => $this->integer(),
+            'deleted_at' => $this->integer(),
+            'deleted_by' => $this->integer()->defaultValue(0)->notNull(),
         ], $tableOptions);
 
         $this->createTable('{{%setting}}', [
@@ -41,7 +82,7 @@ class m180723_185011_init extends Migration
             'created_by' => $this->integer(),
             'updated_by' => $this->integer(),
             'deleted_at' => $this->integer(),
-            'deleted_by' => $this->integer(),
+            'deleted_by' => $this->integer()->defaultValue(0)->notNull(),
         ], $tableOptions);
 
         $this->insertData();

@@ -1,13 +1,12 @@
 <?php
 
-namespace backend\controllers;
+namespace backend\controllers\base;
 
-use yii\rest\ActiveController;
+use yii\rest\Controller;
 use yii\web\Response;
 
-class ExampleRestController extends ActiveController
+class BaseController extends Controller
 {
-    public $modelClass = 'backend\models\Migration';
 
 	public function behaviors()
 	{

@@ -5,9 +5,9 @@ namespace backend\controllers;
 use yii\rest\ActiveController;
 use yii\web\Response;
 
-class ExampleRestController extends ActiveController
+class MigrationController extends ActiveController
 {
-    public $modelClass = 'backend\models\User';
+    public $modelClass = 'backend\models\Migration';
 
 	public function behaviors()
 	{

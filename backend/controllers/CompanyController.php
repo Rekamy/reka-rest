@@ -2,11 +2,12 @@
 
 namespace backend\controllers;
 
-use yii\rest\Controller;
+use yii\rest\ActiveController;
 use yii\web\Response;
 
-class BaseController extends Controller
+class CompanyController extends ActiveController
 {
+    public $modelClass = 'backend\models\Company';
 
 	public function behaviors()
 	{
@@ -23,38 +24,6 @@ class BaseController extends Controller
 		unset($behaviors['rateLimiter']);
 
 		return $behaviors;
-	}
-
-	public function actionIndex()
-	{
-		$object = [
-			'controller' => "ExampleController",
-			'action' => 'index',
-		];
-		return $object;
-	}
-
-	public function actionCreate()
-	{
-		return 'actionCreate';
-	}
-
-	public function actionRead()
-	{
-		return 'actionRead';
-
-	}
-
-	public function actionUpdate()
-	{
-		return 'actionUpdate';
-
-	}
-
-	public function actionDelete()
-	{
-		return 'actionDelete';
-
 	}
 
 }

@@ -5,7 +5,7 @@ namespace backend\controllers;
 use yii\rest\ActiveController;
 use yii\web\Response;
 
-class ExampleRestController extends ActiveController
+class SettingController extends ActiveController
 {
     public $modelClass = 'backend\models\Setting';
 

@@ -12,10 +12,6 @@ class MigrateController extends BaseMigrateController
 
 	public function actionReset()
 	{
-		// var_dump(class_exists('@cli/controllers/MigrateController'));
-		// var_dump(class_exists('Migration'));
-		// var_dump(class_exists('m180712_201402_init'));
-		// die;
 		$migrate = new Migration();
 		$migrate->reset();
 		return 1;

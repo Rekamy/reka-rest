@@ -48,9 +48,10 @@ class User extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description'], 'string', 'max' => 255],
-            [['status', 'deleted_by', 'created_by', 'updated_by'], 'integer'],
-            [['deleted_at', 'created_at', 'updated_at'], 'safe'],
+            [['id','created_at','updated_at','created_by','updated_by','deleted_at','deleted_by'], 'integer', 'size' => 11],
+            [['username','password_hash','password_reset_token','email'], 'string', 'max' => 255],
+            [['auth_key'], 'string', 'max' => 32],
+            [['status'], 'safe'],
         ];
     }
 
@@ -82,7 +83,7 @@ class User extends ActiveRecord
      */
     public static function find()
     {
-        $query = new \common\models\query\UserQuery(get_called_class());
+        $query = new \backend\models\query\UserQuery(get_called_class());
         // uncomment and edit permission rule to view own items only
         /*if(!Yii::$app->user->can('permission')){
            $query->mine();
