@@ -2,12 +2,11 @@
 namespace backend\models;
 
 use Yii;
-use backend\models\base\User;
+use backend\models\base\User as BaseUser;
 use \yii\db\Expression;
 use \yii\base\Exception;
 
-class Example extends BaseModel
-{
+class User extends BaseUser{
 
 
 }

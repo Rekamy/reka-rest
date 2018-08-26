@@ -1,0 +1,17 @@
+/*----------------------------------------
+  General Layout Style
+------------------------------------------*/
+
+body.layout-dark #header nav.navbar-color .header-search-wrapper input.header-search-input:hover, body.layout-dark #header nav.navbar-color .header-search-wrapper input.header-search-input:active, body.layout-dark #header nav.navbar-color .header-search-wrapper input.header-search-input:focus {
+  border: 1px solid #adadad;
+  /* border-bottom: 1px solid #adadad !important; */
+  background: rgba(230, 230, 230, 0);
+}
+
+/* body.layout-dark #header nav.navbar-color .header-search-wrapper input.header-search-input::placeholder {
+  color: #fff;
+}
+
+body.layout-dark #main h1 span.logo-text {
+  color: #fff;
+} */

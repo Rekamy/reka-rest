@@ -48,9 +48,9 @@ class <?= $g['modelName'] ?> extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description'], 'string', 'max' => 255],
-            [['status', 'deleted_by', 'created_by', 'updated_by'], 'integer'],
-            [['deleted_at', 'created_at', 'updated_at'], 'safe'],
+<?php foreach ($g['rules'] as $key => $row) : ?>
+            <?= $row."\n" ?>
+<?php endforeach; ?>
         ];
     }
 
@@ -82,7 +82,7 @@ class <?= $g['modelName'] ?> extends ActiveRecord
      */
     public static function find()
     {
-        $query = new \common\models\query\<?= $g['modelName'] ?>Query(get_called_class());
+        $query = new \backend\models\query\<?= $g['modelName'] ?>Query(get_called_class());
         // uncomment and edit permission rule to view own items only
         /*if(!Yii::$app->user->can('permission')){
            $query->mine();

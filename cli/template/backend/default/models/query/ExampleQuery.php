@@ -1,5 +1,5 @@
 <?= "<?php\n" ?>
-namespace common\models\query;
+namespace backend\models\query;
 
 use Yii;
 

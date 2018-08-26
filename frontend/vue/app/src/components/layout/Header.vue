@@ -129,8 +129,10 @@
             </ul>
           </div>
         </nav>
-        <app-horizontal-menu v-if="isHorizontal"></app-horizontal-menu>
-        <app-horizontal-menu-item v-if="isHorizontal" :id="Dashboarddropdown"></app-horizontal-menu-item>
+        <template id="menu">
+          <app-horizontal-menu v-if="isHorizontal"></app-horizontal-menu>
+          <app-horizontal-menu-item v-if="isHorizontal" :id="Dashboarddropdown"></app-horizontal-menu-item>
+        </template>
       </div>
     </header>
   </div>
@@ -146,6 +148,31 @@
       'app-horizontal-menu': HorizontalMenu,
       'app-horizontal-menu-item': HorizontalMenuItem,
     },
+/*     data() {
+      return {
+        menu: {
+          horizontal: true,
+          left: true,
+          right: true,
+          items: [
+            {
+              // url: '',
+              name: '',
+              items:[
+                {
+                  url: '',
+                  name: '',
+                }
+              ]
+            },
+            {
+              url: '',
+              name: '',
+            }
+          ]
+        }
+      };
+    }, */
     props: {
       isHorizontal: Boolean,
     }

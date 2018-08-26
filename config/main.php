@@ -10,7 +10,7 @@ return [
 	'aliases' => [
 		'@app' => dirname(__DIR__),
 		'@backend' => dirname(__DIR__). '/backend',
-		// '@frontend' => dirname(__DIR__). '/frontend',
+		'@frontend' => dirname(__DIR__). '/frontend',
 		// '@mobile' => dirname(__DIR__). '/mobile',
 	],
 	'components' => [
@@ -19,24 +19,32 @@ return [
 				'application/json' => 'yii\web\JsonParser',
 			]
 		],
+        'user' => [
+            'class' => 'yii\web\User',
+            'identityClass' => 'backend\models\identity\Identity',
+            // 'enableAutoLogin' => true,
+            'enableSession' => false,
+            'loginUrl' => null,
+            // 'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+        ],
 		'urlManager' => [
 			'enablePrettyUrl' => true,
 			// 'enableStrictParsing' => true,
 			'showScriptName' => false,
 			'rules' => [
-				// ['class' => 'yii\rest\UrlRule', 'controller' => 'site'],
+				['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
 			],
 		],
+		// 'db' => [
+		// 	'class' => 'yii\db\Connection',
+		// 	'dsn' => 'sqlite:@app/db.sqlite',
+		// ],
 		'db' => [
 			'class' => 'yii\db\Connection',
-			'dsn' => 'sqlite:@app/db.sqlite',
-		],
-		/*'db' => [
-			'class' => 'yii\db\Connection',
-			'dsn' => 'mysql:localhost:3307/db_name',
-			'user' => 'root',
-			'password' => '',
+            'dsn' => 'mysql:host=localhost:3306;dbname=rekarest_db',
+            'username' => 'root',
+            'password' => '',
 			'charset' => 'utf8',
-		],*/
+		],
 	],
 ];
