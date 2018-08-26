@@ -28,24 +28,21 @@ class GenerateController extends Controller
         return ['o' => 'overwrite'];
     }
 
-    public static function getModelRule()
+    public static function getGeneratorParams()
     {
         $tableSchemas = Yii::$app->db->schema->getTableSchemas();
         $data = [];
         $tbCols = [];
+        $colsConfig = [];
         foreach ($tableSchemas as $key => $table) {
             $data[$table->name]['primaryKey'] = $table->primaryKey;
             $data[$table->name]['foreignKeys'] = $table->foreignKeys;
             foreach ($table->columns as $name => $attr) {
-                // $tbCols[$table->name][$name]['size'] = $attr->size;
-                // $tbCols[$table->name][$name]['type'] = $attr->type;
                 $tbCols[$table->name][$attr->type][$attr->size][] = $name;
-                // $tbCols[$table->name][$attr->type][$attr->size][] = $name;
+                $colsConfig[$table->name][$name]['type'] = $attr->type;
+                $colsConfig[$table->name][$name]['size'] = $attr->size;
             }
         }
-        // var_dump($data);
-        // var_dump($tbCols);
-        // var_dump($tbCols['user']['string'][255]);
         foreach ($tbCols as $tableName => $valueType) {
             foreach ($valueType as $type => $valueSize) {
                 foreach ($valueSize as $size => $value) {
@@ -62,11 +59,12 @@ class GenerateController extends Controller
         foreach ($rows as $key => $row) {
             $tableRule[$key] =  implode($rows[$key], "\n");
         }
-        // var_dump($tableRule['user']);
-        // die;
-        // return $tableRule;
-        return $rows;
+        return [
+            'rows'=>$rows,
+            'tableCols'=>$colsConfig
+        ];
     }
+
     public function actionAll($type = 'rest', $template = 'default', $themes = 'vue')
     {
         // $themes = 'vuetify';
@@ -74,7 +72,8 @@ class GenerateController extends Controller
         Yii::$app->runAction('migrate/up');
         $db = Yii::$app->getDb();
         // $tableSchema = $db->getTableSchema('user')->getColumnNames();
-        $modelRules = self::getModelRule();
+        $generatorParams = self::getGeneratorParams();
+        $modelRules = $generatorParams['rows'];
         $getTableNames = $db->schema->getTableNames();
         $templatePath = Yii::getAlias('@app/cli/template/');
         $templates = [
@@ -140,7 +139,6 @@ class GenerateController extends Controller
                 ],*/
             ];
         }
-        $routerJs = [];
         // generate view file
         $v = new View();
         foreach ($targets as $key => $target) {
@@ -150,13 +148,21 @@ class GenerateController extends Controller
                         $target[$module][$type],
                         $v->renderFile($templates[$module][$type], ['g' => $config[$key]])
                     );
-                    $routerJs[] =  $target[$module][$type];
                     if ($codeFile->save()) {
-                        Console::output('create file '.$target[$module][$type]);
+                        Console::output('create file '.$codeFile->path);
                     }
                 }
             }
         }
+        // generate router file (single file)
+        $routeFile = new MakeFile(
+            Yii::getAlias('@app/frontend/vue/app/src/router.js.example'),
+            $v->renderFile($templatePath . 'frontend/'.$template.'/'.$themes.'/src/router-js.php', ['modules' => $getTableNames])
+        );
+    if ($routeFile->save()) {
+        Console::output('create file '.$routeFile->path);
+    }
+
         
         // regenerate router js file
     }
