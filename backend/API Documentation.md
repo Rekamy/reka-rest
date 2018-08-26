@@ -28,4 +28,4 @@ Integration API
 -------------------
 
 GET /base/module: get white listed module;
-GET /base/module/dev: get module list for developer only (require auth);
+GET /base/module/dev: get module list for developer only (developmemt only);
