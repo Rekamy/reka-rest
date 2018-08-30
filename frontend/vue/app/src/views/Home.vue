@@ -21,8 +21,8 @@
 import WidgetTable from '@/components/widget/Table.vue'
 // import WidgetTable from '@/components/element-ui/components/Table.vue'
 import WidgetCard from "@/components/widget/Card.vue";
-import WidgetBreadcums from "@/components/widget/Breadcrums.vue";
-import WidgetForm from "@/components/widget/Form.vue";
+import WidgetBreadcrums from "@/components/widget/Breadcrums.vue";
+import WidgetForm from "@/components/widget/Form/Form.vue";
 
 export default {
   name: "home",
@@ -30,7 +30,7 @@ export default {
     // WidgetVuetable,
     // WidgetDatatable,
     WidgetTable,
-    WidgetBreadcums,
+    WidgetBreadcrums,
     WidgetCard,
     WidgetForm
   }
