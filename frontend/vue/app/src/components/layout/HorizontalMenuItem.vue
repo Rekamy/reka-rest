@@ -1,7 +1,7 @@
 <template>
-    <ul :id="id" :class="options">
-        <li v-for="item in items">
-            <router-link :to="item.url">{{item.name}}</router-link>
+    <ul v-bind:id="id" class="dropdown-content dropdown-horizontal-list">
+        <li v-for="child in items">
+            <router-link :to="child.url">{{child.name}}</router-link>
         </li>
     </ul>
 </template>
@@ -9,24 +9,21 @@
     export default {
         name: 'horizontal-menu-item',
         data() {
+            //console.log(this.items)
             return {
-                id: 'Dashboarddropdown',
-                options: 'dropdown-content dropdown-horizontal-list',
-                items: [
-                    {
-                        'name': 'eCommerse',
-                        'url': '/dashboard-ecommerce',
-                    },
-                    {
-                        'name': 'Analytics',
-                        'url': '/dashboard-analytics',
-                    },
-                    {
-                        'name': 'Test',
-                        'url': '/dashboard-test',
-                    },
-                ],
             }
+        },
+        props:{
+            items: {
+                type: Array,
+                required: false
+            },
+            id: {
+                type: String
+            }
+        },
+        created(){
+            console.log(this);
         }
     }
 </script>

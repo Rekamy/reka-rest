@@ -7,8 +7,13 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@devexpress/dx-vue-core": "^1.7.0",
+    "@devexpress/dx-vue-grid": "^1.7.0",
+    "@devexpress/dx-vue-grid-bootstrap4": "^1.7.0",
     "register-service-worker": "^1.0.0",
+    "select2": "^4.0.6-rc.1",
     "vue": "^2.5.17",
+    "vue-multiselect": "^2.1.0",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
