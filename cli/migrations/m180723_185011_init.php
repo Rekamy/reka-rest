@@ -14,8 +14,8 @@ class m180723_185011_init extends Migration
             // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
-
-        $this->createTable('{{%user}}', [
+/*
+        $this->createTable('{{%user_test}}', [
             'id' => $this->primaryKey(),
             'username' => $this->string()->notNull()->unique(),
             'auth_key' => $this->string(32)->notNull(),
@@ -32,8 +32,9 @@ class m180723_185011_init extends Migration
             'deleted_by' => $this->integer()->defaultValue(0)->notNull(),
         ], $tableOptions);
 
-        $this->createTable('{{%profile}}', [
+        $this->createTable('{{%profile_test}}', [
             'id' => $this->primaryKey(),
+            'user_id' => $this->integer(),
             'firstname' => $this->string(),
             'lastname' => $this->string(),
             'age' => $this->integer(),
@@ -85,7 +86,8 @@ class m180723_185011_init extends Migration
             'deleted_by' => $this->integer()->defaultValue(0)->notNull(),
         ], $tableOptions);
 
-        $this->insertData();
+        $this->addForeignkey('fk1','{{%profile_test}}','user_id', '{{%user_test}}','id');
+*/        // $this->insertData();
     }
 
     /**

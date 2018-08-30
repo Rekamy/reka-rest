@@ -13,7 +13,7 @@ class <?= $g['modelName'] ?>Query extends \yii\db\ActiveQuery
     /*public function active()
     {
         if(!Yii::$app->user->can('Administrator')) {
-            $this->andWhere('[[status]]=1');
+            $this->andWhere(['status' =>1]);
         }
         return $this;
     }*/

@@ -2,7 +2,7 @@
   <div>
     <header id="header" class="page-topbar">
       <div class="navbar-fixed">
-        <nav class="navbar-color gradient-45deg-light-blue-cyan">
+        <nav :class="`navbar-color ${navColor}`">
           <div class="nav-wrapper">
             <ul class="left">
               <li>
@@ -131,7 +131,7 @@
         </nav>
         <template id="menu">
           <app-horizontal-menu v-if="isHorizontal"></app-horizontal-menu>
-          <app-horizontal-menu-item v-if="isHorizontal" :id="Dashboarddropdown"></app-horizontal-menu-item>
+          <app-horizontal-menu-item v-if="isHorizontal"></app-horizontal-menu-item>
         </template>
       </div>
     </header>
@@ -139,14 +139,23 @@
 </template>
 
 <script>
-  import HorizontalMenu from './HorizontalMenu.vue'
-  import HorizontalMenuItem from './HorizontalMenuItem.vue'
+  import AppHorizontalMenu from './HorizontalMenu.vue'
+  import AppHorizontalMenuItem from './HorizontalMenuItem.vue'
+  import Style from './../design/Style.vue'
 
   export default {
     name: 'Header',
     components: {
-      'app-horizontal-menu': HorizontalMenu,
-      'app-horizontal-menu-item': HorizontalMenuItem,
+      AppHorizontalMenu,
+      AppHorizontalMenuItem,
+      Style,
+    },
+    data () {
+      return {
+        // navColor: '',
+        navColor: Style.color.purpleDeepOrangeShadow,
+        // navColor: Style.color.purpleDeepOrange,
+      }
     },
 /*     data() {
       return {

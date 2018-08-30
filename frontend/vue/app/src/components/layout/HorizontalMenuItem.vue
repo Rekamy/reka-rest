@@ -6,27 +6,27 @@
     </ul>
 </template>
 <script>
-    export default {
-        name: 'horizontal-menu-item',
-        data() {
-            return {
-                id: 'Dashboarddropdown',
-                options: 'dropdown-content dropdown-horizontal-list',
-                items: [
-                    {
-                        'name': 'eCommerse',
-                        'url': '/dashboard-ecommerce',
-                    },
-                    {
-                        'name': 'Analytics',
-                        'url': '/dashboard-analytics',
-                    },
-                    {
-                        'name': 'Test',
-                        'url': '/dashboard-test',
-                    },
-                ],
-            }
+export default {
+  name: "horizontal-menu-item",
+  data() {
+    return {
+      id: "Dashboarddropdown",
+      options: "dropdown-content dropdown-horizontal-list",
+      items: [
+        {
+          name: "eCommerse",
+          url: "/dashboard-ecommerce"
+        },
+        {
+          name: "Analytics",
+          url: "/dashboard-analytics"
+        },
+        {
+          name: "Test",
+          url: "/dashboard-test"
         }
-    }
+      ]
+    };
+  }
+};
 </script>

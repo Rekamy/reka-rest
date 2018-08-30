@@ -1,20 +1,39 @@
 <template>
   <div class="home">
-  	<widget-card></widget-card>
-  	<widget-form></widget-form>
+    <widget-breadcrums>
+      <li>
+        <router-link to="/">Dashboard</router-link>
+      </li>
+      <li class="active">Dashboard</li>
+    </widget-breadcrums>
+    <widget-card></widget-card>
+    <!-- <widget-datatable/> -->
+    <!-- <widget-vuetable/> -->
+    <widget-table/>
+    <widget-form></widget-form>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Card from '@/components/widget/Card.vue'
-import Form from '@/components/widget/Form.vue'
+// import Vuetable from "@/components/widget/Vuetable.vue";
+// import Datatable from '@/components/widget/Datatable.vue'
+import WidgetTable from '@/components/widget/Table.vue'
+// import WidgetTable from '@/components/element-ui/components/Table.vue'
+import WidgetCard from "@/components/widget/Card.vue";
+import WidgetBreadcums from "@/components/widget/Breadcrums.vue";
+import WidgetForm from "@/components/widget/Form.vue";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
-    'widget-card': Card,
-    'widget-form': Form,
+    // WidgetVuetable,
+    // WidgetDatatable,
+    WidgetTable,
+    WidgetBreadcums,
+    WidgetCard,
+    WidgetForm
   }
-}
+};
 </script>
+
