@@ -2,15 +2,16 @@
 namespace cli\controllers;
 
 use Yii;
-use yii\helpers\Console;
-use yii\console\Controller;
-use cli\controllers\MigrateController;
-use backend\components\MakeFile;
-use cli\template\ModelGenerator;
-use cli\template\CrudGenerator;
-use yii\helpers\Inflector;
 use yii\web\View;
+use yii\console\Controller;
+use yii\helpers\Console;
+use yii\helpers\Inflector;
+use yii\helpers\ArrayHelper;
+use backend\components\MakeFile;
 use backend\components\Migration;
+use cli\controllers\MigrateController;
+use cli\template\CrudGenerator;
+use cli\template\ModelGenerator;
 
 class GenerateController extends Controller
 {
@@ -28,10 +29,12 @@ class GenerateController extends Controller
         return ['o' => 'overwrite'];
     }
 
-    public static function getGeneratorParams()
+    public static function getGeneratorParams2()
     {
         $tableSchemas = Yii::$app->db->schema->getTableSchemas();
         $data = [];
+        $rows = [];
+        $searchRules = [];
         $tbCols = [];
         $colsConfig = [];
         foreach ($tableSchemas as $key => $table) {
@@ -60,8 +63,76 @@ class GenerateController extends Controller
             $tableRule[$key] =  implode($rows[$key], "\n");
         }
         return [
-            'rows'=>$rows,
+            'attributeRules'=>$rows,
+            'searchRules'=>$searchRules,
             'tableCols'=>$colsConfig
+        ];
+    }
+
+    public static function getGeneratorParams()
+    {
+        $tableSchemas = Yii::$app->db->schema->getTableSchemas();
+        $data = [];
+        $rows = [];
+        $searchRules = [];
+        $tbCols = [];
+        $colsConfig = [];
+        $relations = [];
+        foreach ($tableSchemas as $key => $table) {
+            $tbConfig[$table->name]['primaryKey'] = $table->primaryKey;
+            $tbConfig[$table->name]['foreignKeys'] = $table->foreignKeys;
+            if($table->foreignKeys) {
+                foreach ($table->foreignKeys as $fkKey => $fkVal) {
+                    // $relations['hasOne'][$table->name]['relName'] = Inflector::pluralize(Inflector::id2camel($value[0],'_'));
+                    $tempTable = $fkVal[0];
+                    $relRef[] = '\\base\\models\\'.Inflector::id2camel($table->name,'_').'::className()';
+                    $relInv[] = '\\base\\models\\'.Inflector::id2camel($fkVal[0],'_').'::className()';
+                    $temp = array_slice($fkVal,1);
+                    foreach ($temp as $curCol => $refCol) {
+                        $relRef[] = "['$curCol' => '$refCol']";
+                        $relInv[] = "['$refCol' => '$curCol']";
+                    }
+                    $relations[$tempTable][$fkKey]['name'] = Inflector::pluralize(Inflector::id2camel($table->name,'_'));
+                    $relations[$tempTable][$fkKey]['data'] = 'return $this->hasMany('.implode(',', $relRef).');';
+                    $relations[$table->name][$fkKey]['name'] = Inflector::id2camel($tempTable,'_');
+                    $relations[$table->name][$fkKey]['data'] = 'return $this->hasOne('.implode(',', $relInv).');';
+                    // var_dump($relations['user_test']);die;
+                }
+            }
+            $i = 0;
+            foreach ($table->columns as $name => $attr) {
+                // col sorted by table name > type > size > name
+                $tbCols[$table->name][$attr->type][$attr->size][] = $name;
+
+                // col sorted by table name > columns > name > attribute
+                $tbConfig[$table->name]['columns'][$name]['name'] = $name;
+                $tbConfig[$table->name]['columns'][$name]['type'] = $attr->type;
+                $tbConfig[$table->name]['columns'][$name]['size'] = $attr->size;
+                $tbConfig[$table->name]['columns'][$name]['comment'] = $attr->comment;
+                $i++;
+            }
+        }
+        foreach ($tbCols as $tableName => $valueType) {
+            foreach ($valueType as $type => $valueSize) {
+                foreach ($valueSize as $size => $value) {
+                    if ($type == 'string') {
+                        $rows[$tableName][] = "[['".implode($value, '\',\'')."'], '".$type."', 'max' => ".$size."],";
+                    }
+                }
+                if ($type == 'integer') {
+                    $rows[$tableName][] = "[['".implode($value, '\',\'')."'], '".$type."'],";
+                }
+                if(!in_array($type, ['integer', 'string'])) {
+                    $rows[$tableName][] = "[['".implode($value, '\',\'')."'], 'safe'],";
+                }
+            }
+        }
+
+
+        return [
+            'attributeRules'=>$rows,
+            'tableConfig'=>$tbConfig,
+            'relations'=>$relations
         ];
     }
 
@@ -71,9 +142,7 @@ class GenerateController extends Controller
         $this->overwrite = true;
         Yii::$app->runAction('migrate/up');
         $db = Yii::$app->getDb();
-        // $tableSchema = $db->getTableSchema('user')->getColumnNames();
         $generatorParams = self::getGeneratorParams();
-        $modelRules = $generatorParams['rows'];
         $getTableNames = $db->schema->getTableNames();
         $templatePath = Yii::getAlias('@app/cli/template/');
         $templates = [
@@ -105,24 +174,31 @@ class GenerateController extends Controller
         // var_dump($templates);die;
 
         foreach ($getTableNames as $key => $tableName) {
-            $fileName = Inflector::camel2words(Inflector::id2camel($tableName, '_'));
+            $moduleName = Inflector::camel2words(Inflector::id2camel($tableName, '_'));
+            $modelName = Inflector::id2camel($tableName, '_');
+            $fileName = Inflector::camel2id($modelName);
+
             $config[] = [
-                'modelName' => $fileName,
+                'modelName' => $modelName,
+                'moduleName' => $moduleName,
+                'fileName' => $fileName,
                 'tableName' => $tableName,
-                'rules' => $modelRules[$tableName],
+                'rules' => $generatorParams['attributeRules'][$tableName],
+                'relations' => isset($generatorParams['relations'][$tableName]) ? $generatorParams['relations'][$tableName] : null,
             ];
-            // var_dump($config);
+
             $targets[] = [
                 'models' => [
-                    'baseModel' => Yii::getAlias('@app/backend/models/base/'.$fileName.'.php'),
-                    'extendedModel' => Yii::getAlias('@app/backend/models/'.$fileName.'.php'),
-                    'queryModel' => Yii::getAlias('@app/backend/models/query/'.$fileName.'Query.php'),
-                    'searchModel' => Yii::getAlias('@app/backend/models/search/'.$fileName.'Search.php'),
+                    'baseModel' => Yii::getAlias('@app/backend/models/base/'.$modelName.'.php'),
+                    'extendedModel' => Yii::getAlias('@app/backend/models/'.$modelName.'.php'),
+                    'queryModel' => Yii::getAlias('@app/backend/models/query/'.$modelName.'Query.php'),
+                    'searchModel' => Yii::getAlias('@app/backend/models/search/'.$modelName.'Search.php'),
                 ],
                 'controllers' => [
-                    'activeController' => Yii::getAlias('@app/backend/controllers/'.$fileName.'Controller.php'),
+                    'activeController' => Yii::getAlias('@app/backend/controllers/'.$modelName.'Controller.php'),
                 ],
                 'frontend' => [
+                    'index-vue' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/base.vue'),
                     'index-vue' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/index.vue'),
                     'index-js' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/index.js'),
                     'index-scss' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/index.scss'),
@@ -154,17 +230,24 @@ class GenerateController extends Controller
                 }
             }
         }
+
         // generate router file (single file)
         $routeFile = new MakeFile(
             Yii::getAlias('@app/frontend/vue/app/src/router.js.example'),
-            $v->renderFile($templatePath . 'frontend/'.$template.'/'.$themes.'/src/router-js.php', ['modules' => $getTableNames])
+            $v->renderFile($templatePath . 'frontend/'.$template.'/'.$themes.'/src/router-js.php', ['configs' => $config])
         );
-    if ($routeFile->save()) {
-        Console::output('create file '.$routeFile->path);
-    }
+        if ($routeFile->save()) {
+            Console::output('create file '.$routeFile->path);
+        }
+        // generate router file (single file)
+        $routeFile = new MakeFile(
+            Yii::getAlias('@app/config/routes.php'),
+            $v->renderFile($templatePath . 'backend/'.$template.'/routes.php', ['configs' => $config])
+        );
+        if ($routeFile->save()) {
+            Console::output('create file '.$routeFile->path);
+        }
 
-        
-        // regenerate router js file
     }
 
 
@@ -205,7 +288,6 @@ class GenerateController extends Controller
                     }
                 }
 
-                //var_dump($content);die;
                 fwrite($newCont, $content);
                 fclose($handle);
                 fclose($newCont);

@@ -7,9 +7,17 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@devexpress/dx-vue-core": "^1.7.0",
+    "@devexpress/dx-vue-grid": "^1.7.0",
+    "@devexpress/dx-vue-grid-bootstrap4": "^1.7.0",
+    "axios": "^0.18.0",
+    "bootstrap4": "0.0.1-security",
+    "element-ui": "^2.4.6",
+    "open-iconic": "^1.1.1",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.17",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuetable-2": "^1.7.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0",

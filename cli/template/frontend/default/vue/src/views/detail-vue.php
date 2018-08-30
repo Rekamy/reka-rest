@@ -1,6 +1,6 @@
 <template>
   <div class="<?= $g['modelName'] ?>">
-    <h1>This is an <?= $g['modelName'] ?> detail page</h1>
+    <h1>This is an <?= $g['moduleName'] ?> detail page</h1>
   </div>
 </template>
 

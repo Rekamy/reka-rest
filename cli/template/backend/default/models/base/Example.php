@@ -21,7 +21,7 @@ class <?= $g['modelName'] ?> extends ActiveRecord
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'created_at',
                 'updatedAtAttribute' => 'updated_at',
-                'value' => new Expression('CURRENT_TIMESTAMP'),
+                // 'value' => new Expression('CURRENT_TIMESTAMP'),
             ],
             'blameable' => [
                 'class' => BlameableBehavior::className(),
@@ -36,12 +36,6 @@ class <?= $g['modelName'] ?> extends ActiveRecord
         return '{{%<?= $g['tableName'] ?>}}';
     }
 
-    public static function arrayList($callback = false)
-    {
-        $callback = is_array($callback) ? $callback : self::find()->orderBy('<?= $g['tableName'] ?>.id')->asArray()->all();
-        return \yii\helpers\ArrayHelper::map($callback, 'id', '<?= $g['tableName'] ?>.name');
-    }
-
     /**
      * @inheritdoc
      */
@@ -54,27 +48,20 @@ class <?= $g['modelName'] ?> extends ActiveRecord
         ];
     }
 
-    /**
-     * The following code shows how to apply a default condition for all queries:
-     *
-     * ```php
-     * class Customer extends ActiveRecord
-     * {
-     *     public static function find()
-     *     {
-     *         return parent::find()->andWhere(['deleted' => false]);
-     *     }
-     * }
-     *
-     * // Use andWhere()/orWhere() to apply the default condition
-     * // SELECT FROM customer WHERE `deleted`=:deleted AND age>30
-     * $customers = Customer::find()->andWhere('age>30')->all();
-     *
-     * // Use where() to ignore the default condition
-     * // SELECT FROM customer WHERE age>30
-     * $customers = Customer::find()->andWhere('age>30')->all();
-     * ```
-     */
+<?php if ($g['relations']) : ?>
+<?php foreach ($g['relations'] as $fk => $rel) : ?>
+    public function get<?= $rel['name'] ?>()
+    {
+        <?= $rel['data'] ?>;
+    }
+<?php endforeach; ?>
+<?php endif; ?>
+
+    public static function arrayList($callback = false)
+    {
+        $callback = is_array($callback) ? $callback : self::find()->orderBy('<?= $g['tableName'] ?>.id')->asArray()->all();
+        return \yii\helpers\ArrayHelper::map($callback, 'id', '<?= $g['tableName'] ?>.name');
+    }
 
     /**
      * @inheritdoc

@@ -8,6 +8,29 @@ use \yii\base\Exception;
 
 class <?= $g['modelName'] ?> extends Base<?= $g['modelName'] ?>
 {
+    /**
+     * @inheritdoc
+     */
+    /* public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+        /* if ($insert) {
+            // if new record
+        } */
 
+        // ...custom code here...
+        return true;
+    } */
+
+    /**
+     * @inheritdoc
+     */
+    /* public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        // ...custom code here...
+    } */
 
 }

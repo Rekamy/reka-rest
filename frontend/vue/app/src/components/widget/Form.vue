@@ -16,18 +16,6 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="input-field col s12">
-								<input id="email5" type="email">
-								<label for="email" class="">Email</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s12">
-								<input id="password6" type="password">
-								<label for="password">Password</label>
-							</div>
-						</div>
-						<div class="row">
 							<div class="file-field input-field col s6">
 								<input class="file-path validate" type="text">
 								<div class="btn">
@@ -64,18 +52,11 @@
 
 <script>
 	export default {
-		name: 'form-text',
-		data: function() {
-/*			formObject : {
-				field : {
-					name :'test'
-				}
-				type:'text, email, password, submit, ',
-				class:'input-field, file-field, file-path, validate, materialize-textarea, mater',
-			}*/
+		name: 'widget-form',
+		data: () => {
 			return {
 				form: {
-					
+
 				}
 			}
 		}

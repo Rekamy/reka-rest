@@ -17,17 +17,6 @@ use common\models\<?= $g['modelName'] ?>;
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
-        return [
-            [['id', 'status', 'created_by', 'updated_by', 'deleted_by'], 'integer'],
-            [['name', 'description', 'created_at', 'updated_at', 'deleted_at'], 'safe'],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class

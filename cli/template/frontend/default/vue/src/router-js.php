@@ -21,15 +21,21 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     },
-<?php foreach ($modules as $module) : ?>
+<?php foreach ($configs as $config) : ?>
     {
-      path: '/<?= $module ?>',
-      name: '<?= $module ?>',
-      meta: {
-        js: './index.js',
-        scss: './index.scss'
-      },
-      component: () => import('./views/<?= $module ?>/<?= ucfirst($module) ?>.vue')
+      path: '/<?= $config['fileName'] ?>',
+      name: '<?= $config['modelName'] ?>',
+      component: () => import('./views/<?= $config['fileName'] ?>/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/<?= $config['fileName'] ?>/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/<?= $config['fileName'] ?>/form.vue')
+          }
+      ]
     },
 <?php endforeach; ?>
   ]

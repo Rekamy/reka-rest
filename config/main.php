@@ -1,5 +1,6 @@
 <?php
 
+require __DIR__ . '/../config/routes.php';
 return [
 	'id' => 'micro-app',
     // the basePath of the application will be the `micro-app` directory
@@ -31,9 +32,7 @@ return [
 			'enablePrettyUrl' => true,
 			// 'enableStrictParsing' => true,
 			'showScriptName' => false,
-			'rules' => [
-				['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
-			],
+			'rules' => $rules,
 		],
 		// 'db' => [
 		// 	'class' => 'yii\db\Connection',
