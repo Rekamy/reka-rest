@@ -129,10 +129,8 @@
             </ul>
           </div>
         </nav>
-        <template id="menu">
-          <app-horizontal-menu v-if="isHorizontal"></app-horizontal-menu>
-          <app-horizontal-menu-item v-if="isHorizontal"></app-horizontal-menu-item>
-        </template>
+        <app-horizontal-menu v-if="isHorizontal" v-bind:items="items"></app-horizontal-menu>
+        <app-horizontal-menu-item v-if="isHorizontal" v-for="item in items" v-bind:items="item.items" v-bind:id="item.activateEvent"></app-horizontal-menu-item>
       </div>
     </header>
   </div>
@@ -184,6 +182,50 @@
     }, */
     props: {
       isHorizontal: Boolean,
+    },
+    data(){
+      return {
+        items: [
+            {
+                'name': 'Dashboard',
+                'icon': 'dashboard',
+                'active': '',
+                'options': 'dropdown-menu',
+                'activateEvent': 'Dashboarddropdown',
+                'url': '',
+                items: [
+                    {
+                        'name': 'eCommerse',
+                        'url': '/dashboard-ecommerce'
+                    }
+                ]
+            },
+            {
+                'name': 'Company',
+                'icon': 'dvr',
+                'active': '',
+                'options': 'dropdown-menu',
+                'activateEvent': 'Companydropdown',
+                'url': '/test',
+                items: [
+                ]
+            },
+            {
+                'name': 'Order',
+                'icon': 'cast',
+                'active': '',
+                'options': 'dropdown-menu',
+                'activateEvent': 'Orderdropdown',
+                'url': '',
+                items: [
+                    {
+                        'name': 'Test',
+                        'url': '/dashboard-test'
+                    },
+                ]
+            },
+        ]
+      }
     }
   }
 </script>

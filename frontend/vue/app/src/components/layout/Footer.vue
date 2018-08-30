@@ -35,3 +35,9 @@ export default {
   // },
 }
 </script>
+
+<style lang="scss">
+  #footer{
+    z-index: 100;
+  }
+</style>
