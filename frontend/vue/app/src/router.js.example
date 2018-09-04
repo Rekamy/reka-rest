@@ -1,0 +1,520 @@
+import Vue from "vue";
+import Router from "vue-router";
+import Home from "./views/Home.vue";
+
+Vue.use(Router);
+
+export default new Router({
+  mode: "history",
+  base: process.env.BASE_URL,
+  routes: [
+    {
+      path: "/",
+      name: "home",
+      component: Home
+    },
+    {
+      path: "/about",
+      name: "about",
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+    },
+    {
+      path: '/attachment',
+      name: 'Attachment',
+      component: () => import('./views/attachment/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/attachment/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/attachment/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/attachment-access',
+      name: 'AttachmentAccess',
+      component: () => import('./views/attachment-access/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/attachment-access/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/attachment-access/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/attachment-metatag',
+      name: 'AttachmentMetatag',
+      component: () => import('./views/attachment-metatag/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/attachment-metatag/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/attachment-metatag/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/attachment-metatag-keylist',
+      name: 'AttachmentMetatagKeylist',
+      component: () => import('./views/attachment-metatag-keylist/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/attachment-metatag-keylist/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/attachment-metatag-keylist/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/auth-assignment',
+      name: 'AuthAssignment',
+      component: () => import('./views/auth-assignment/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/auth-assignment/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/auth-assignment/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/auth-item',
+      name: 'AuthItem',
+      component: () => import('./views/auth-item/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/auth-item/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/auth-item/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/auth-item-child',
+      name: 'AuthItemChild',
+      component: () => import('./views/auth-item-child/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/auth-item-child/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/auth-item-child/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/auth-rule',
+      name: 'AuthRule',
+      component: () => import('./views/auth-rule/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/auth-rule/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/auth-rule/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/branch',
+      name: 'Branch',
+      component: () => import('./views/branch/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/branch/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/branch/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/cache',
+      name: 'Cache',
+      component: () => import('./views/cache/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/cache/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/cache/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/company',
+      name: 'Company',
+      component: () => import('./views/company/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/company/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/company/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/company-pic',
+      name: 'CompanyPic',
+      component: () => import('./views/company-pic/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/company-pic/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/company-pic/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/company-role',
+      name: 'CompanyRole',
+      component: () => import('./views/company-role/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/company-role/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/company-role/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/company-role-assignment',
+      name: 'CompanyRoleAssignment',
+      component: () => import('./views/company-role-assignment/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/company-role-assignment/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/company-role-assignment/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/efies',
+      name: 'Efies',
+      component: () => import('./views/efies/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/efies/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/efies/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/efies-status',
+      name: 'EfiesStatus',
+      component: () => import('./views/efies-status/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/efies-status/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/efies-status/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/fe-service',
+      name: 'FeService',
+      component: () => import('./views/fe-service/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/fe-service/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/fe-service/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/fe-service-status',
+      name: 'FeServiceStatus',
+      component: () => import('./views/fe-service-status/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/fe-service-status/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/fe-service-status/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/fe-service-type',
+      name: 'FeServiceType',
+      component: () => import('./views/fe-service-type/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/fe-service-type/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/fe-service-type/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/fe-type',
+      name: 'FeType',
+      component: () => import('./views/fe-type/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/fe-type/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/fe-type/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/level',
+      name: 'Level',
+      component: () => import('./views/level/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/level/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/level/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/location',
+      name: 'Location',
+      component: () => import('./views/location/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/location/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/location/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/log',
+      name: 'Log',
+      component: () => import('./views/log/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/log/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/log/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/migration',
+      name: 'Migration',
+      component: () => import('./views/migration/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/migration/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/migration/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/notified',
+      name: 'Notified',
+      component: () => import('./views/notified/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/notified/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/notified/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/order',
+      name: 'Order',
+      component: () => import('./views/order/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/order/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/order/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/order-item',
+      name: 'OrderItem',
+      component: () => import('./views/order-item/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/order-item/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/order-item/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/order-item-type',
+      name: 'OrderItemType',
+      component: () => import('./views/order-item-type/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/order-item-type/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/order-item-type/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: () => import('./views/profile/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/profile/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/profile/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/service-reason',
+      name: 'ServiceReason',
+      component: () => import('./views/service-reason/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/service-reason/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/service-reason/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/setting',
+      name: 'Setting',
+      component: () => import('./views/setting/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/setting/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/setting/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/site',
+      name: 'Site',
+      component: () => import('./views/site/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/site/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/site/form.vue')
+          }
+      ]
+    },
+    {
+      path: '/user',
+      name: 'User',
+      component: () => import('./views/user/index.vue'),
+      children: [
+          {
+            path: 'detail',
+            component: () => import('./views/user/detail.vue')
+          },
+          {
+            path: 'form',
+            component: () => import('./views/user/form.vue')
+          }
+      ]
+    },
+  ]
+});

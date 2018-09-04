@@ -1,0 +1,36 @@
+  import Jquery from "dist-asset/materialize/vendors/jquery-3.2.1.min.js";
+  import Materialize from "dist-asset/materialize/js/materialize.min.js";
+  import PerfectScrollbar from "dist-asset/materialize/vendors/perfect-scrollbar/perfect-scrollbar.min.js";
+  import ChartJs from "dist-asset/materialize/vendors/chartjs/chart.min.js";
+  import Sparkline from "dist-asset/materialize/vendors/sparkline/jquery.sparkline.min.js";
+  import Jvectormap from "dist-asset/materialize/vendors/jvectormap/jquery-jvectormap-1.2.2.min.js";
+  import JvectormapWorldMill from "dist-asset/materialize/vendors/jvectormap/jquery-jvectormap-world-mill-en.js";
+  import Vectormap from "dist-asset/materialize/vendors/jvectormap/vectormap-script.js";
+  import MaterializePlugins from "dist-asset/materialize/js/plugins.js";
+  import AnalyticsJs from "dist-asset/materialize/js/scripts/dashboard-analytics.js";
+  import CustomScript from "dist-asset/materialize/js/custom-script.js";
+
+
+
+
+
+
+  <script type="text/javascript" src="dist-asset/materialize/vendors/jquery-3.2.1.min.js"></script>
+  <!--materialize js-->
+  <script type="text/javascript" src="dist-asset/materialize/js/materialize.min.js"></script>
+  <!--scrollbar-->
+  <script type="text/javascript" src="dist-asset/materialize/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+  <!-- chartjs -->
+  <script type="text/javascript" src="dist-asset/materialize/vendors/chartjs/chart.min.js"></script>
+  <!-- sparkline -->
+  <script type="text/javascript" src="dist-asset/materialize/vendors/sparkline/jquery.sparkline.min.js"></script>
+  <!--jvectormap-->
+  <script type="text/javascript" src="dist-asset/materialize/vendors/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+  <script type="text/javascript" src="dist-asset/materialize/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+  <script type="text/javascript" src="dist-asset/materialize/vendors/jvectormap/vectormap-script.js"></script>
+  <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+  <script type="text/javascript" src="dist-asset/materialize/js/plugins.js"></script>
+  <!--card-advanced.js - Page specific JS-->
+  <!-- <script type="text/javascript" src="dist-asset/materialize/js/scripts/dashboard-analytics.js"></script> -->
+  <!--custom-script.js - Add your own theme custom JS-->
+  <script type="text/javascript" src="dist-asset/materialize/js/custom-script.js"></script>

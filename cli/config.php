@@ -8,33 +8,53 @@ return [
     // set an alias to enable autoloading of classes from the 'micro' namespace
 	'aliases' => [
         '@cli' => __DIR__,
-		'@app' => dirname(__DIR__),
+        '@app' => dirname(__DIR__),
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
-	],
+    ],
     'controllerMap' => [
         'migrate' => [
             'class' => 'cli\controllers\MigrateController',
             // 'class' => 'yii\console\controllers\MigrateController',
             'migrationPath' => [
                 '@cli/migrations',
-                // '@yii/log/migrations',
-                // '@yii/caching/migrations',
-                // '@yii/rbac/migrations',
+                '@yii/log/migrations',
+                '@yii/caching/migrations',
+                '@yii/rbac/migrations',
             ],
         ],
     ],
-	'components' => [
+    'components' => [
 /*      'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'sqlite:@micro/db.sqlite',
         ],*/
-		'db' => [
-			'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost:3306;dbname=rekarest_db',
-            'username' => 'root',
-            'password' => '',
-			'charset' => 'utf8',
-		],
-	],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'cache' => 'cache',
+        ],
+        'log' => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'targets' => [
+                // 'file' => [
+                //     'class' => 'yii\log\FileTarget',
+                //     'levels' => ['error', 'warning'],
+                // ],
+                'db' => [
+                    'class' => 'yii\log\DbTarget',
+                    'levels' => ['error', 'warning'],
+                ],
+            ],
+        ],
+        'cache' => [
+            'class' => 'yii\caching\DbCache',
+        ],
+        'db' => [
+         'class' => 'yii\db\Connection',
+         'dsn' => 'mysql:host=localhost:3306;dbname=rekarest_db',
+         'username' => 'root',
+         'password' => '',
+         'charset' => 'utf8',
+     ],
+ ],
 ];

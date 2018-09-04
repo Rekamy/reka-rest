@@ -136,11 +136,13 @@ class GenerateController extends Controller
         ];
     }
 
-    public function actionAll($type = 'rest', $template = 'default', $themes = 'vue')
+    public function actionAll($type = 'rest', $template = 'default', $themes = 'materialize')
     {
         // $themes = 'vuetify';
         $this->overwrite = true;
-        Yii::$app->runAction('migrate/up');
+        (new Migration)->reset();
+        Yii::$app->runAction('migrate');
+        (new Migration)->insertData();
         $db = Yii::$app->getDb();
         $generatorParams = self::getGeneratorParams();
         $getTableNames = $db->schema->getTableNames();
@@ -198,16 +200,16 @@ class GenerateController extends Controller
                     'activeController' => Yii::getAlias('@app/backend/controllers/'.$modelName.'Controller.php'),
                 ],
                 'frontend' => [
-                    'index-vue' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/base.vue'),
-                    'index-vue' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/index.vue'),
-                    'index-js' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/index.js'),
-                    'index-scss' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/index.scss'),
-                    'detail-vue' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/detail.vue'),
-                    'detail-js' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/detail.js'),
-                    'detail-scss' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/detail.scss'),
-                    'form-vue' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/form.vue'),
-                    'form-js' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/form.js'),
-                    'form-scss' => Yii::getAlias('@app/frontend/vue/app/src/views/'.$fileName.'/form.scss'),
+                    'index-vue' => Yii::getAlias('@app/frontend/vue/'.$themes.'/src/views/'.$fileName.'/base.vue'),
+                    'index-vue' => Yii::getAlias('@app/frontend/vue/'.$themes.'/src/views/'.$fileName.'/index.vue'),
+                    'index-js' => Yii::getAlias('@app/frontend/vue/'.$themes.'/src/views/'.$fileName.'/index.js'),
+                    'index-scss' => Yii::getAlias('@app/frontend/vue/'.$themes.'/src/views/'.$fileName.'/index.scss'),
+                    'detail-vue' => Yii::getAlias('@app/frontend/vue/'.$themes.'/src/views/'.$fileName.'/detail.vue'),
+                    'detail-js' => Yii::getAlias('@app/frontend/vue/'.$themes.'/src/views/'.$fileName.'/detail.js'),
+                    'detail-scss' => Yii::getAlias('@app/frontend/vue/'.$themes.'/src/views/'.$fileName.'/detail.scss'),
+                    'form-vue' => Yii::getAlias('@app/frontend/vue/'.$themes.'/src/views/'.$fileName.'/form.vue'),
+                    'form-js' => Yii::getAlias('@app/frontend/vue/'.$themes.'/src/views/'.$fileName.'/form.js'),
+                    'form-scss' => Yii::getAlias('@app/frontend/vue/'.$themes.'/src/views/'.$fileName.'/form.scss'),
                     // 'route' => Yii::getAlias('@app/frontend/app/vue/app/src/router.js'),
                 ],
                 /*'mobile' => [

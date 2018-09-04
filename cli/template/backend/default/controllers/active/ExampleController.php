@@ -17,6 +17,10 @@ class <?= $g['modelName'] ?>Controller extends ActiveController
 			//'application/xml' => Response::FORMAT_XML,
 		];
 
+		$behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
+        ];
+
 		// comment out this part to use authenticator
 		unset($behaviors['authenticator']);
 

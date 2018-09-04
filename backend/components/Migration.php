@@ -221,13 +221,14 @@ class Migration extends BaseMigration
         }
     }
     public function insertData() {
-        $dir = $_SERVER["YII_PATH"].'backup/data/';
-        $backup = array_slice(scandir($dir),2);
-        $backup = array_filter($backup,function($var) {
-            return stristr($var, 'backup_') && stristr($var, '.sql');
-        });
-        rsort($backup);
-        $dataFile = $backup[0];
+        $dir = $_SERVER["YII_PATH"].'cli/demo/';
+        // $backup = array_slice(scandir($dir),2);
+        // $backup = array_filter($backup,function($var) {
+        //     return stristr($var, 'backup_') && stristr($var, '.sql');
+        // });
+        // rsort($backup);
+        // $dataFile = $backup[0];
+        $dataFile = 'data.sql';
         $dbTransac = Yii::$app->db->beginTransaction();
         try {
             if (is_file($dir.$dataFile)) {

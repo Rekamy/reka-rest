@@ -8,7 +8,7 @@
               <li>
                 <h1 class="logo-wrapper">
                   <router-link to="/" class="brand-logo darken-1">
-                    <img src="dist-asset/materialize/images/logo/materialize-logo.png" alt="materialize logo">
+                    <img src="./../../assets/materialize/images/logo/materialize-logo.png" alt="materialize logo">
                     <span class="logo-text hide-on-med-and-down">Materialize</span>
                   </router-link>
                 </h1>
@@ -20,7 +20,7 @@
             </div>
             <ul class="right hide-on-med-and-down">
               <li>
-                <a href="javascript:void(0);" class="waves-effect waves-block waves-light translation-button" data-activates="translation-dropdown">
+                <a href="javascript:void(0);" class="waves-effect waves-block waves-light translation-button"  data-activates="translation-dropdown">
                   <span class="flag-icon flag-icon-gb"></span>
                 </a>
               </li>
@@ -39,7 +39,7 @@
               <li>
                 <a href="javascript:void(0);" class="waves-effect waves-block waves-light profile-button" data-activates="profile-dropdown">
                   <span class="avatar-status avatar-online">
-                    <img src="dist-asset/materialize/images/avatar/avatar-7.png" alt="avatar">
+                    <img src="./../../assets/materialize/images/avatar/avatar-7.png" alt="avatar">
                     <i></i>
                   </span>
                 </a>
@@ -130,102 +130,79 @@
           </div>
         </nav>
         <app-horizontal-menu v-if="isHorizontal" v-bind:items="items"></app-horizontal-menu>
-        <app-horizontal-menu-item v-if="isHorizontal" v-for="item in items" v-bind:items="item.items" v-bind:id="item.activateEvent"></app-horizontal-menu-item>
+        <app-horizontal-menu-item v-if="isHorizontal" v-for="item in items" :key="item.id" v-bind:items="item.items" v-bind:id="item.activateEvent"></app-horizontal-menu-item>
       </div>
     </header>
   </div>
 </template>
 
 <script>
-  import AppHorizontalMenu from './HorizontalMenu.vue'
-  import AppHorizontalMenuItem from './HorizontalMenuItem.vue'
-  import Style from './../design/Style.vue'
+import AppHorizontalMenu from '@/components/layout/HorizontalMenu.vue';
+import AppHorizontalMenuItem from '@/components/layout/HorizontalMenuItem.vue';
+import Style from '@/components/design/Style.vue';
 
-  export default {
-    name: 'Header',
-    components: {
-      AppHorizontalMenu,
-      AppHorizontalMenuItem,
-      Style,
-    },
-    data () {
-      return {
-        // navColor: '',
-        navColor: Style.color.purpleDeepOrangeShadow,
-        // navColor: Style.color.purpleDeepOrange,
-      }
-    },
-/*     data() {
-      return {
-        menu: {
-          horizontal: true,
-          left: true,
-          right: true,
+export default {
+  name: "Header",
+  components: {
+    AppHorizontalMenu,
+    AppHorizontalMenuItem,
+    Style
+  },
+  props: {
+    isHorizontal: Boolean
+  },
+  data() {
+    return {
+      navColor: Style.color.purpleDeepOrangeShadow,
+      hover: Boolean,
+      items: [
+        {
+          name: "Dashboard",
+          icon: "dashboard",
+          active: "",
+          options: "dropdown-menu",
+          activateEvent: "Dashboarddropdown",
+          url: "",
           items: [
             {
-              // url: '',
-              name: '',
-              items:[
-                {
-                  url: '',
-                  name: '',
-                }
-              ]
+              name: "Form",
+              url: "/form"
             },
             {
-              url: '',
-              name: '',
+              name: "Table",
+              url: "/table"
+            },
+            {
+              name: "Detail",
+              url: "/detail"
+            },
+          ]
+        },
+        {
+          name: "Company",
+          icon: "dvr",
+          active: "",
+          options: "dropdown-menu",
+          activateEvent: "Companydropdown",
+          url: "/form",
+          items: []
+        },
+        {
+          name: "Order",
+          icon: "cast",
+          active: "",
+          options: "dropdown-menu",
+          activateEvent: "Orderdropdown",
+          url: "",
+          items: [
+            {
+              name: "About",
+              url: "/about"
             }
           ]
         }
-      };
-    }, */
-    props: {
-      isHorizontal: Boolean,
-    },
-    data(){
-      return {
-        items: [
-            {
-                'name': 'Dashboard',
-                'icon': 'dashboard',
-                'active': '',
-                'options': 'dropdown-menu',
-                'activateEvent': 'Dashboarddropdown',
-                'url': '',
-                items: [
-                    {
-                        'name': 'eCommerse',
-                        'url': '/dashboard-ecommerce'
-                    }
-                ]
-            },
-            {
-                'name': 'Company',
-                'icon': 'dvr',
-                'active': '',
-                'options': 'dropdown-menu',
-                'activateEvent': 'Companydropdown',
-                'url': '/test',
-                items: [
-                ]
-            },
-            {
-                'name': 'Order',
-                'icon': 'cast',
-                'active': '',
-                'options': 'dropdown-menu',
-                'activateEvent': 'Orderdropdown',
-                'url': '',
-                items: [
-                    {
-                        'name': 'Test',
-                        'url': '/dashboard-test'
-                    },
-                ]
-            },
-        ]
-      }
-    }
+      ]
+    };
   }
+};
 </script>

@@ -481,7 +481,7 @@ class m180828_225458_next extends Migration
 
 
         $this->insertFk();
-        // $this->addView();
+        $this->addView();
         // $this->defaultData();
         // $this->insertScenario();
         // $this->insertIndex();

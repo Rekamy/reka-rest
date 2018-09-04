@@ -1,23 +1,42 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import "./registerServiceWorker";
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import Vue from 'vue'
+import App from './App'
+import router from './router'
+import axios from 'axios'
+import moment from 'moment'
+import Vuetify from 'vuetify'
+// import 'vuetify/dist/vuetify.min.css';
+import "material-design-icons-iconfont/dist/material-design-icons.css";
+import "vue-multiselect/dist/vue-multiselect.min.css";
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
+
+Vue.use(VueMaterial)
 
 
-// additional CSS
-import "../public/dist-asset/materialize/css/themes/horizontal-menu/materialize.css";
-import "../public/dist-asset/materialize/css/themes/horizontal-menu/style.css";
-// import "../public/dist-asset/style.css";
-import "../public/dist-asset/materialize/css/layouts/style-horizontal.css";
-import "../public/dist-asset/materialize/vendors/perfect-scrollbar/perfect-scrollbar.css";
-import "../public/dist-asset/materialize/vendors/jvectormap/jquery-jvectormap.css";
-import "../public/dist-asset/materialize/vendors/flag-icon/css/flag-icon.min.css";
-import "../node_modules/vue-multiselect/dist/vue-multiselect.min.css";
-// import "../public/dist-asset/materialize/css/custom/custom.css";
+Object.defineProperty(Vue.prototype, '$http', {value: axios})
+Object.defineProperty(Vue.prototype, '$moment', {value: moment})
 
-Vue.config.productionTip = false;
+Vue.use(Vuetify)
+Vue.config.productionTip = false
 
+import "./assets/materialize/css/themes/horizontal-menu/materialize.css";
+import "./assets/materialize/css/themes/horizontal-menu/style.css";
+import "./assets/materialize/css/layouts/style-horizontal.css";
+// import "./assets/materialize/vendors/perfect-scrollbar/perfect-scrollbar.css";
+// import "./assets/materialize/vendors/jvectormap/jquery-jvectormap.css";
+// import "./assets/materialize/vendors/flag-icon/css/flag-icon.min.css";
+
+/* eslint-disable no-new */
 new Vue({
+  el: '#app',
   router,
-  render: h => h(App)
-}).$mount("#app");
+  components: { App },
+  template: '<App/>'
+})
+
+
+// new Vue({
+// 	render: h => h(App)
+// }).$mount('#app')

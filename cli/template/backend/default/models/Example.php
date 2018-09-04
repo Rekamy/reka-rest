@@ -16,9 +16,9 @@ class <?= $g['modelName'] ?> extends Base<?= $g['modelName'] ?>
         if (!parent::beforeSave($insert)) {
             return false;
         }
-        /* if ($insert) {
+        if ($insert) {
             // if new record
-        } */
+        }
 
         // ...custom code here...
         return true;

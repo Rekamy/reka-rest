@@ -1,32 +1,35 @@
 <template>
-  <app-container></app-container>
+  <div id="app">
+    <!-- <div class="gradient-45deg-purple-deep-orange gradient-shadow"> Hai</div> -->
+    <!-- <router-view/> -->
+    <AppHeader />
+    <AppTable />
+  </div>
 </template>
 
 <script>
-  import Container from './components/layout/Container.vue'
-
+  import AppHeader from '@/components/layout/Header'
+  import AppTable from '@/components/Test'
   export default {
+    name: 'App',
     components: {
-      'app-container': Container
+      AppHeader,
+      AppTable
     },
-
+    created() {
+      console.log(this.$http ? 'Axios works!' : 'Axios fail to load');
+      console.log(this.$moment ? 'Moment works!' : 'Moment fail to load');
+    }
   }
 </script>
 
-<style lang="scss">
-    /* label underline focus color */
-    .row .multsel input:focus {
-    border-bottom: none !important;
-    box-shadow: none !important
-    }
-  
-    .row .multsel input {
-      height: 1px !important;
-    }
-  
-    .multiselect__tags{
-      border: none !important;
-      border-bottom: 1px solid #9f9f9f !important;
-      border-radius: 0px !important;
-    }
-  </style>
+<style>
+/*#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}*/
+</style>
