@@ -19,7 +19,13 @@ class ServiceReasonController extends ActiveController
 
 		$behaviors['corsFilter'] = [
             'class' => \yii\filters\Cors::className(),
+			'cors' => [
+				'Origin' => ['*'],
+				'Access-Control-Expose-Headers' => ['*'],
+			]
+
         ];
+
 
 		// comment out this part to use authenticator
 		unset($behaviors['authenticator']);
@@ -30,4 +36,14 @@ class ServiceReasonController extends ActiveController
 		return $behaviors;
 	}
 
+	public function actions()
+	{
+	    $actions = parent::actions();
+	    // refer https://github.com/yiisoft/yii2/issues/4479
+	    $actions['index']['prepareDataProvider'] = function($action) 
+	    {
+	    	return $this->modelClass::getDataProvider();
+	    };
+	    return $actions;
+	}
 }

@@ -140,9 +140,10 @@ class GenerateController extends Controller
     {
         // $themes = 'vuetify';
         $this->overwrite = true;
-        (new Migration)->reset();
+        $this->interactive = false;
+        /*(new Migration)->reset();
         Yii::$app->runAction('migrate');
-        (new Migration)->insertData();
+        (new Migration)->insertData();*/
         $db = Yii::$app->getDb();
         $generatorParams = self::getGeneratorParams();
         $getTableNames = $db->schema->getTableNames();

@@ -1073,10 +1073,10 @@
         },
         {
             "name": "npm-asset/vue",
-            "version": "2.5.16",
+            "version": "2.5.17",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/vue/-/vue-2.5.16.tgz",
+                "url": "https://registry.npmjs.org/vue/-/vue-2.5.17.tgz",
                 "reference": null,
                 "shasum": null
             },

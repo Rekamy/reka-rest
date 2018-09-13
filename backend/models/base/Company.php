@@ -6,6 +6,7 @@ use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 use \yii\db\Expression;
+use \yii\data\ActiveDataProvider;
 
 class Company extends ActiveRecord
 {
@@ -92,5 +93,34 @@ class Company extends ActiveRecord
            return $query;
         } */
         return $query->andWhere(['company.deleted_by' => 0]);
+    }
+
+    public static function getDataProvider()
+    {
+        $query = self::find();
+
+        /**
+         * uncomment if filter query are using single value to match all attributes
+         **/
+        if($search = Yii::$app->request->get('search')) {
+            foreach ((new self)->getAttributes() as $key => $value) {
+                $searchCondition[] = ['like', $key , $search];
+            }
+            array_unshift($searchCondition, 'or');
+            $query->andFilterWhere($searchCondition);
+        }
+        
+        /**
+         * uncomment if filter query are segregate by attribute
+         **/
+        if($filterCondition = Yii::$app->request->get('filter')) {
+            foreach ($filterCondition = Yii::$app->request->get('filter') as $key => $value) {
+                $query->andFilterWhere(['like', $key, $value]);
+            }
+        }
+        
+        return new ActiveDataProvider([
+            'query' => $query,
+        ]);
     }
 }

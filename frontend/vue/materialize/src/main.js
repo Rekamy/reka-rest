@@ -37,7 +37,12 @@ import "../public/dist-asset/materialize/vendors/flag-icon/css/flag-icon.min.css
 // import "../public/dist-asset/materialize/js/scripts/dashboard-analytics.js";
 // import "../public/dist-asset/materialize/js/custom-script.js";
 
-Object.defineProperty(Vue.prototype, "$http", { value: Axios });
+const api = Axios.create({
+  baseURL: 'https://gitlab.com/api/v4/',
+  headers: {'Private-Token': '4N2bR65QKhAnTDnBAg9e'}
+});
+
+Object.defineProperty(Vue.prototype, "$http", { value: api });
 Object.defineProperty(Vue.prototype, "$moment", { value: Moment });
 // Object.defineProperty(Vue.prototype, "$", { value: Jquery });
 // Object.defineProperty(Vue.prototype, "$mat", { value: Materialize });
